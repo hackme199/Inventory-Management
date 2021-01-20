@@ -1,0 +1,8 @@
+<div class="row mr-auto">
+  <h2>CATEGORIES</h2>
+</div>
+<div class="row">
+    <div class="col-md-4 product" [routerLink]="['/products', product.name]" *ngFor="let product of productsList">
+      <app-category-item [productItem] = "product"></app-category-item>
+    </div>
+</div>
