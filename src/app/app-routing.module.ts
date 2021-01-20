@@ -10,8 +10,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoriesComponent },
   { path: 'products/:name', component: ProductsComponent },
 
-  { path: '', component: CategoriesComponent },
-  { path: '**', component: CategoriesComponent }
+  { path: '', component: CategoriesComponent }
 ];
 
 @NgModule({
