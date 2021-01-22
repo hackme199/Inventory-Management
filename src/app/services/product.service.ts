@@ -22,4 +22,11 @@ export class ProductService {
     return this.http.get<Product[]>(productsUrl);
     }
 
+  addProduct(product: Product) {
+    this.http.post<Product>(productsUrl, product).toPromise().then(data => {
+      console.log(data)
+    })
+    
+  }
+
 }

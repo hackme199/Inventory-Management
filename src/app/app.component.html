@@ -2,17 +2,16 @@
   <app-nav></app-nav>
   <!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
   <div class = "container">
-    <!-- <div class = "row">
-      <div class = "col">
-        <app-nav></app-nav>
-      </div>
-    </div> -->
-
     <div class = "row">
-      <div class = "col">
+      <div class = "col col-md-9">
         <!-- The routed views render in the <router-outlet>-->
         <router-outlet></router-outlet>
         </div>
+    
+        <div class = "col">
+          <!-- The routed views render in the <router-outlet>-->
+          <app-cart></app-cart>
+        </div>
     </div>
-  </div>
+  
 </div>

@@ -1,0 +1,26 @@
+<div class="container">
+  <div>
+    <h1>Add Category</h1>
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">
+          Name
+        </label>
+        <input id="name" type="text" formControlName="name">
+      </div>
+    
+      <!-- <div>
+        <label for="id">
+          ID
+        </label>
+        <input id="address" type="text" formControlName="id">
+      </div> -->
+    
+      <button class="button" type="submit">Add</button>
+    </form>
+  </div>
+</div>
+
+<div class="container" *ngIf="addedCategory">
+  <span style="color: green;">Added "{{model.name}}" Successfully !</span>
+</div>

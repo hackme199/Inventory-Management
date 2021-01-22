@@ -13,6 +13,11 @@ import { CategoryItemComponent } from './categories/category-item/category-item.
 import { ProductsComponent } from './products/products.component';
 import { CategoryService } from './services/category.service';
 import { ProductItemComponent } from './products/product-item/product-item.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
+import { AddCategoryComponent } from './categories/add-category/add-category.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CartComponent } from './cart/cart.component';
+import { CartItemComponent } from './cart/cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +30,17 @@ import { ProductItemComponent } from './products/product-item/product-item.compo
     CategoryItemComponent,
     ProductsComponent,
     ProductItemComponent,
+    AddProductComponent,
+    AddCategoryComponent,
+    CartComponent,
+    CartItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [CategoryService],
   bootstrap: [AppComponent]

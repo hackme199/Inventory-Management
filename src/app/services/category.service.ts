@@ -29,5 +29,11 @@ export class CategoryService {
     return this.http.get<Categories[]>(categoriesUrl);
   }
 
+  addCategory(category: Categories) {
+    this.http.post<Categories>(categoriesUrl, category).toPromise().then(data => {
+      console.log(data);
+    });
+  }
+
   
 }
