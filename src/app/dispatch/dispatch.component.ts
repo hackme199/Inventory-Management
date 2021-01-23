@@ -51,6 +51,12 @@ export class DispatchComponent implements OnInit {
       this.dispatchList = items;
       // console.log(this.cartItems)
       // this.calcCartTotal();
+      // this.cartService.getCartItems().subscribe((items: CartItem[]) => {
+      //   for (let i in items) { 
+      //     this.dispatchList.push(new DispatchItem(items[i]))
+      //   }
+      //   console.log(this.dispatchList)
+      // })
     })
   }
 
