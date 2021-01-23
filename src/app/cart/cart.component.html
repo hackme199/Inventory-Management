@@ -1,4 +1,4 @@
-<div class="container card"  *ngIf="dispatchFlag">
+<div class="container card">
     <div class="row" style="text-decoration: underline;">
         <div class="col alert d-flex justify-content-center">
             DISPATCH CART
@@ -11,7 +11,7 @@
             <app-cart-item [cartItem] = "cartItem"></app-cart-item>
         </li>
         <div class="row"><div class="col">&nbsp;</div></div>
-        <button class="btn bg-info" [routerLink]="['/dispatch']" (click)="dispatch()">DISPATCH</button>
+        <button class="btn bg-info" [routerLink]="['/dispatch']">DISPATCH</button>
     
         <!-- <li class="list-group-item active">
             <strong>Total : {{ cartTotal | currency:'INR'}}</strong>

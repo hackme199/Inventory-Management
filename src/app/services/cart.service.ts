@@ -21,7 +21,7 @@ export class CartService {
         let cartItems: CartItem[] = [];
 
         for (let item of result) {
-          console.log(item)
+          // console.log(item)
           let productExists = false
 
           for (let i in cartItems) {
@@ -36,6 +36,7 @@ export class CartService {
             cartItems.push(new CartItem(item.id, item.product));
           }
         }
+        // console.log(cartItems)
 
         return cartItems;
       })

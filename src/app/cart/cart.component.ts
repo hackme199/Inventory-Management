@@ -35,14 +35,14 @@ export class CartComponent implements OnInit {
   loadCartItems() {
     this.cartService.getCartItems().subscribe((items: CartItem[]) => {
       this.cartItems = items;
-      // console.log(this.cartItems)
+      console.log(this.cartItems)
       // this.calcCartTotal();
     })
   }
 
-  dispatch() {
-    return this.dispatchFlag = false
-  }
+  // dispatch() {
+  //   return this.dispatchFlag = false
+  // }
 
   // calcCartTotal() {
   //   this.cartTotal = 0
