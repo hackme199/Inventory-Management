@@ -21,6 +21,7 @@ export class CartService {
         let cartItems: CartItem[] = [];
 
         for (let item of result) {
+          console.log(item)
           let productExists = false
 
           for (let i in cartItems) {

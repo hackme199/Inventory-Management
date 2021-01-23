@@ -1,4 +1,4 @@
-<div class="container card">
+<div class="container card"  *ngIf="dispatchFlag">
     <div class="row" style="text-decoration: underline;">
         <div class="col alert d-flex justify-content-center">
             DISPATCH CART
@@ -7,11 +7,11 @@
     <div *ngIf="cartItems.length === 0" class = "alert alert-info">No Items Added for Dispatch</div>
     
     <ul *ngIf="cartItems.length > 0" class="list-group">
-        <li class="list-group-item bg-light" *ngFor="let item of cartItems">
-            <app-cart-item [cartItem] = "item"></app-cart-item>
+        <li class="list-group-item bg-light" *ngFor="let cartItem of cartItems">
+            <app-cart-item [cartItem] = "cartItem"></app-cart-item>
         </li>
         <div class="row"><div class="col">&nbsp;</div></div>
-        <button class="btn bg-info">DISPATCH</button>
+        <button class="btn bg-info" [routerLink]="['/dispatch']" (click)="dispatch()">DISPATCH</button>
     
         <!-- <li class="list-group-item active">
             <strong>Total : {{ cartTotal | currency:'INR'}}</strong>

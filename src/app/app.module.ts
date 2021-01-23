@@ -18,6 +18,7 @@ import { AddCategoryComponent } from './categories/add-category/add-category.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
+import { DispatchComponent } from './dispatch/dispatch.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CartItemComponent } from './cart/cart-item/cart-item.component';
     AddProductComponent,
     AddCategoryComponent,
     CartComponent,
-    CartItemComponent
+    CartItemComponent,
+    DispatchComponent
   ],
   imports: [
     BrowserModule,

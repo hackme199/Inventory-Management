@@ -1,4 +1,10 @@
-<div class="cart-item d-flex justify-content-center text-secondary">
-    <span>{{cartItem.productName}} x {{cartItem.qty}} </span>
+<div class="cart-item d-flex text-secondary container-fluid">
+    <div class="row ">
+      <div class="col" style="font-size: small;">{{cartItem.productName}} <strong>x</strong> {{cartItem.qty}}</div>
+      <div class="btn-group btn-group-sm col-1" role="group">
+        <button type="button" class="btn btn-danger" (click)="handleDeleteCartItem(cartItem)">X</button>
+      </div>  
+    </div>
+    
  </div>
  
