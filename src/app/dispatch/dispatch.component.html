@@ -1,58 +1,151 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="dispatchForm" (ngSubmit)="onSubmit()" *ngIf="!proceedFlag">
 <div class="container">
-  <h2>Dispatching To...</h2>
-    <div class="row">
+    <div class="row justify-items-end">
       
-      <div class="col-md-6 ">
-        <!-- <form [formGroup]="productForm" (ngSubmit)="onSubmit()"> -->
-          <!-- <div class="form-group">
-            <label for="name">Name</label>
-            <input id="name" type="text" formControlName="name" class="form-control">
-
-            <label for="phone">Phone</label>
-          <input id="phone" type="number" formControlName="phone"  class="form-control">
-          </div> -->
-          <div class="form-group">
+      <div class="col-md-8 card bg-danger">
+        <div class="card-header" style="color: white;">Dispatching To...</div>
+        
+          <div class="form-group card-body">
           <div class="form-row">
-            <div class="col">
-              <input id="name" placeholder="Name" type="text" formControlName="name" class="form-control">
+            <div class="col" >
+              <input id="name" placeholder="Name" type="text" formControlName="name" class="form-control ">
+              <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                <div *ngIf="name.errors.required">
+                  Name is required.
+                </div>
+                <div *ngIf="name.errors.minlength">
+                  Name must be at least 4 characters long.
+                </div>
+              </div>
             </div>
+            
+
             <div class="col">
               <input  id="phone" type="text" formControlName="phone" placeholder="Phone" class="form-control">
+              <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+                <div *ngIf="phone.errors.required">
+                  Phone is required.
+                </div>
+                <div *ngIf="phone.errors.minlength">
+                  Enter a valid 10 digit number
+                </div>
+              </div>
             </div>
+            
+            <div class="col">
+              <input id="location" placeholder="Location" type="text" formControlName="place" class="form-control ">
+              <div *ngIf="place.invalid && (place.dirty || place.touched)" class="alert alert-danger">
+                <div *ngIf="place.errors.required">
+                  Location is required.
+                </div>
+              </div>
+            </div>
+            
           </div>
           </div>
-        <!-- </form> -->
-      </div>
-    </div>
-  </div>
+        </div>
 
-<table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">ProductID</th>
-        <th scope="col">ProductName</th>
-        <th scope="col">Qty</th>
-        <th scope="col">Remarks</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of dispatchList">
-        <th scope="row">{{item.productId}}</th>
-        <td>{{item.productName}}</td>
-        <td>{{item.qty}}</td>
-        <td>
+      <div class="col-md-4 card bg-warning">
+        <div class="card-header" style="color: white;">Dispatched By...</div>
+        
+        
+        <div class="form-group card-body">
           <div class="form-row">
             <div class="col">
-              <input id="remarks" placeholder="Remarks" type="text" class="form-control">
+              <input id="dispatcherName" placeholder="Name" type="text" formControlName="dispatcherName" class="form-control ">
+              <div *ngIf="dispatcherName.invalid && (dispatcherName.dirty || dispatcherName.touched)" class="alert alert-danger">
+                <div *ngIf="dispatcherName.errors.required">
+                  Name is required.
+                </div>
+                <div *ngIf="dispatcherName.errors.minlength">
+                  Name must be at least 4 characters long.
+                </div>
+              </div>
             </div>
+            
             </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+        </div>
+    </div>
+  </div>
+  <br>
+
+  <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ProductID</th>
+          <th scope="col">ProductName</th>
+          <th scope="col">Qty</th>
+          <!-- <th scope="col">Remarks</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dispatchList">
+          <th scope="row">{{item.productId}}</th>
+          <td>{{item.productName}}</td>
+          <td>{{item.qty}}</td>
+          <!-- <td>
+            <div class="form-row">
+              <div class="col">
+                <input id="remarks" placeholder="Remarks" type="text" class="form-control">
+              </div>
+              </div>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Remarks</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="remarks"></textarea>
+  </div>
+
   
   <!-- <button class="btn bg-secondary" style="color: white;" [routerLink] = "['/categories']" >EDIT</button>&nbsp; -->
-  <button class="btn bg-success" style="color: white;">PROCEED</button>
+  <button class="btn bg-success" style="color: white;" type="submit" [disabled]="dispatchForm.invalid">PROCEED</button>
 
 </form>
+
+<table class="table table-bordered" *ngIf="proceedFlag">
+  <thead>
+    <tr>
+      <th scope="col">Date of Issuing</th>
+      <td scope="col">{{myDate | date:'dd-MM-yyyy' }}</td>
+      <th scope="col">Location</th>
+      <td scope="col">{{model.place}}</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="col" colspan="1">Issued By</th>
+      <td scope="col">{{model.dispatcherName}}</td>
+      <th colspan="2">Signature : </th>  
+      <!-- <td scope="col"></td> -->
+    </tr>
+    <tr>
+      <th >Authorised To</th>
+      <td>{{model.name}}</td>
+      <th >Phone </th>  
+      <td>{{model.phone}}</td>
+      <!-- <td>Thornton</td>
+      <td>@fat</td> -->
+    </tr>
+  
+    <tr>
+      <th scope="col">ProductID</th>
+      <th scope="col">ProductName</th>
+      <th scope="col" colspan="2">Quantity</th>
+    </tr>
+  
+    <tr *ngFor="let item of model.cartItems">
+      <td scope="col">{{item.productId}}</td>
+      <td scope="col">{{item.productName}}</td>
+      <td scope="col" colspan="2">{{item.qty}}</td>
+    </tr>
+
+    <tr>
+      <th>Remarks</th>
+      <td colspan="3">{{model.remarks}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -19,6 +19,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { DispatchComponent } from './dispatch/dispatch.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { DispatchHistoryComponent } from './dispatch-history/dispatch-history.component';
+import { ViewDispatchComponent } from './view-dispatch/view-dispatch.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { DispatchComponent } from './dispatch/dispatch.component';
     AddCategoryComponent,
     CartComponent,
     CartItemComponent,
-    DispatchComponent
+    DispatchComponent,
+    CheckoutComponent,
+    DispatchHistoryComponent,
+    ViewDispatchComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,60 @@
+<!-- <span>Showing {{categoryName}}</span> -->
+<div class="row mr-auto">
+    <h2>Dispatch Details</h2>
+  </div>
+  <div class="row">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body row ">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-9">
+                            <p class="card-text">{{itemToView.date | date: 'medium'}}</p>
+                        </div>
+                        <div class="col-12">
+                            <p>----------------------------------------------------</p>
+                        </div>
+                        <div class="col-5">
+                            <p class="card-text"><strong>Dispatched to : </strong>{{itemToView.name}}</p>
+                        </div>
+                        <div class="col-4">
+                            <p><strong>Contact : </strong>{{itemToView.phone}}</p>
+                        </div>
+                        <div class="col-3" *ngIf="!itemToView.returnStatus">
+                            <button *ngIf="!markFlag" class="btn btn-danger" (click)="returned()">Mark as returned</button>
+                            <button *ngIf="markFlag" class="btn btn-success">Marked as returned</button>      
+                        </div>
+                        <div class="col-3" *ngIf="itemToView.returnStatus">
+                            <button class="btn" [disabled]="true" style="background-color: green; color: white">Returned</button>      
+                        </div>
+                    </div>
+                    <p class="card-text"><strong>Issued by : </strong>{{itemToView.dispatcherName}}</p> 
+                    <p class="card-text"><strong>Remarks : </strong>{{itemToView.remarks}}</p> 
+                </div>
+                <br>
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">ProductID</th>
+                        <th scope="col">ProductName</th>
+                        <th scope="col">Qty</th>
+                        <!-- <th scope="col">Remarks</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of itemToView.cartItems">
+                        <th scope="row">{{item.productId}}</th>
+                        <td>{{item.productName}}</td>
+                        <td>{{item.qty}} <button class="btn btn-sm btn-danger" (click)="reduceQty(item)">X</button></td>
+                        <!-- <td>
+                          <div class="form-row">
+                            <div class="col">
+                              <input id="remarks" placeholder="Remarks" type="text" class="form-control">
+                            </div>
+                            </div>
+                        </td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+  </div>

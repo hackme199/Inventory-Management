@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from '../models/cart-item';
 import { CartService } from '../services/cart.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MessengerService } from '../services/messenger.service';
+import { CheckoutService } from '../services/checkout.service';
 
 
 @Component({
@@ -13,14 +14,46 @@ import { MessengerService } from '../services/messenger.service';
 })
 export class DispatchComponent implements OnInit {
 
-  productForm = this.formBuilder.group({
-    name: '',
-    phone: ''
+  dispatchForm = this.formBuilder.group({
+    // name: '',
+    name: new FormControl(name, [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    // phone: '',
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10), Validators.maxLength(10)
+    ]),
+    place: new FormControl('',[
+      Validators.required]),
+    dispatcherName: new FormControl(name, [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    remarks: ''
   });
+
+  get name() { return this.dispatchForm.get('name'); }
+  get dispatcherName() { return this.dispatchForm.get('dispatcherName'); }
+  get place() { return this.dispatchForm.get('place'); }
+  get phone() { return this.dispatchForm.get('phone'); }
+
+
+  myDate = new Date();
 
   proceedFlag: boolean = false
 
-  model = {name: '', phone: ''}
+  model = {
+    name: '',
+    phone: 0,
+    place: '',
+    dispatcherName: '',
+    remarks: '',
+    cartItems: [],
+    date: this.myDate,
+    returnStatus: false
+  }
   dispatchList: CartItem[]
 
   constructor(
@@ -28,14 +61,11 @@ export class DispatchComponent implements OnInit {
     private cart: CartService,
     private formBuilder: FormBuilder,
     private msg: MessengerService,
-    private cartService: CartService
+    private cartService: CartService,
+    private checkout: CheckoutService
     ) { }
 
   ngOnInit(): void {
-    // this.cart.getCartItems().subscribe((cartItems) => {
-    //   this.dispatchList = cartItems
-    //   console.log(this.dispatchList)
-    // })
     this.handleSubscription();
     this.loadCartItems();
   }
@@ -49,29 +79,25 @@ export class DispatchComponent implements OnInit {
   loadCartItems() {
     this.cartService.getCartItems().subscribe((items: CartItem[]) => {
       this.dispatchList = items;
-      // console.log(this.cartItems)
-      // this.calcCartTotal();
-      // this.cartService.getCartItems().subscribe((items: CartItem[]) => {
-      //   for (let i in items) { 
-      //     this.dispatchList.push(new DispatchItem(items[i]))
-      //   }
-      //   console.log(this.dispatchList)
-      // })
     })
   }
 
+  onSubmit() {
+    this.model.name = this.dispatchForm.value.name
+    this.model.place = this.dispatchForm.value.place
+    this.model.phone = this.dispatchForm.value.phone
+    this.model.dispatcherName = this.dispatchForm.value.dispatcherName
+    this.model.remarks = this.dispatchForm.value.remarks
+    this.model.cartItems = this.dispatchList
 
-  onSubmit(): void {
-    this.model.name = this.productForm.value.name
-    this.model.phone = this.productForm.value.phone
-    
-  //   this.model.id = this.productList.length
+    this.checkout.writeToCheckout(this.model).subscribe((data) => {
+      console.log(data)
+    })
+    this.proceedFlag = true
+
+    // this.cartService.clearCart()
     console.log(this.model)
-
-    // console.log(this.model)
-  //   this.product.addProduct(this.model)
-
-    this.productForm.reset();
+    
   }
 
 }

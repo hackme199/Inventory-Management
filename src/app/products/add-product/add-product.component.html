@@ -8,6 +8,14 @@
             <label for="name">Name</label>
             <input id="name" type="text" formControlName="name" class="form-control">
           </div>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+              Name is required.
+            </div>
+            <div *ngIf="name.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+          </div>
   
           <div class="form-group">
               <label for="description">
@@ -15,8 +23,18 @@
               </label>
               <input id="description" type="text" formControlName="description"  class="form-control">
           </div>
+
+          <br>
+
+          <div *ngIf="addedProduct" class="alert alert-success">
+            <span style="color: green;">Added "{{model.name}}" Successfully !</span>
+          </div>
         
-          <button class="btn btn-dark" type="submit">Add</button>
+          <br>
+    
+      <button [disabled]="productForm.invalid" class="btn btn-dark" type="submit">Add</button>&nbsp;
+      <button class="btn btn-info" [routerLink]="['/products', model.category]">Back</button>  
+
         </form>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild,NgModule  } from '@angular/core';
 
 import { Categories } from '../../models/category';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
@@ -15,9 +15,16 @@ import { ActivatedRoute } from '@angular/router';
 export class AddCategoryComponent implements OnInit {
 
   categoryForm = this.formBuilder.group({
-    name: '',
-    id: 200
+    // name: '',
+    // id: 200
+    name: new FormControl(name, [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
   });
+
+  get name() { return this.categoryForm.get('name'); }
+  
 
   categoryList: Categories[]
   addedCategory : boolean = false
@@ -44,7 +51,12 @@ export class AddCategoryComponent implements OnInit {
     this.model.id = this.categoryList.length
     console.log(this.model)
     this.category.addCategory(this.model)
+
     this.addedCategory = true
+
+    this.category.getCategories().subscribe(categories => {
+      this.categoryList = categories
+    })
     this.categoryForm.reset();
   }
 

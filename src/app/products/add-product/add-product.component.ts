@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 
 
@@ -13,13 +13,20 @@ import { ProductService } from 'src/app/services/product.service';
 export class AddProductComponent implements OnInit {
 
   productForm = this.formBuilder.group({
-    name: '',
+    name: new FormControl(name, [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    // name: '',
     description: '',
     category:'',
     id : 401
   });
 
   productList : Product[]
+  addedProduct: boolean = false
+
+  get name() { return this.productForm.get('name'); }
 
   model : Product = {id: 10, name: '', description: '', category:'', imageUrl: ''}
 
@@ -42,11 +49,16 @@ export class AddProductComponent implements OnInit {
     this.model.name = this.productForm.value.name
     this.model.description = this.productForm.value.description
     
-    this.model.id = this.productList.length
+    this.model.id = this.productList.length+1
     console.log(this.model.id)
 
     console.log(this.model)
     this.product.addProduct(this.model)
+
+    this.addedProduct = true
+    this.product.getProducts().subscribe(products => {
+      this.productList = products
+    })
 
     this.productForm.reset();
   }

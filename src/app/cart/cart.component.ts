@@ -12,7 +12,7 @@ import { CartItem } from 'src/app/models/cart-item';
 export class CartComponent implements OnInit {
 
   cartItems = [];
-  dispatchFlag = true
+  dispatchFlag = false
 
   // cartTotal = 0
 
@@ -35,14 +35,14 @@ export class CartComponent implements OnInit {
   loadCartItems() {
     this.cartService.getCartItems().subscribe((items: CartItem[]) => {
       this.cartItems = items;
-      console.log(this.cartItems)
+      // console.log(this.cartItems)
       // this.calcCartTotal();
     })
   }
 
-  // dispatch() {
-  //   return this.dispatchFlag = false
-  // }
+  dispatch() {
+    return this.dispatchFlag = true
+  }
 
   // calcCartTotal() {
   //   this.cartTotal = 0
