@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import {NgxPrintModule} from 'ngx-print';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { DispatchComponent } from './dispatch/dispatch.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { DispatchHistoryComponent } from './dispatch-history/dispatch-history.component';
 import { ViewDispatchComponent } from './view-dispatch/view-dispatch.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -41,14 +43,16 @@ import { ViewDispatchComponent } from './view-dispatch/view-dispatch.component';
     DispatchComponent,
     CheckoutComponent,
     DispatchHistoryComponent,
-    ViewDispatchComponent
+    ViewDispatchComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPrintModule
   ],
   providers: [CategoryService],
   bootstrap: [AppComponent]

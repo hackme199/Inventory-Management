@@ -3,7 +3,7 @@
     <h2>Dispatch Details</h2>
   </div>
   <div class="row">
-        <div class="card mb-4 shadow-sm">
+        <div class="card mb-4 shadow-sm" id="print-section">
             <div class="card-body row ">
                 <div class="col-12">
                     <div class="row">
@@ -20,8 +20,8 @@
                             <p><strong>Contact : </strong>{{itemToView.phone}}</p>
                         </div>
                         <div class="col-3" *ngIf="!itemToView.returnStatus">
-                            <button *ngIf="!markFlag" class="btn btn-danger" (click)="returned()">Mark as returned</button>
-                            <button *ngIf="markFlag" class="btn btn-success">Marked as returned</button>      
+                            <button *ngIf="!markFlag" class="btn btn-danger" id="retBut" (click)="returned()">Mark as returned</button>
+                            <button *ngIf="markFlag" class="btn btn-success" id="retBut">Marked as returned</button>      
                         </div>
                         <div class="col-3" *ngIf="itemToView.returnStatus">
                             <button class="btn" [disabled]="true" style="background-color: green; color: white">Returned</button>      
@@ -41,10 +41,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of itemToView.cartItems">
+                      <tr *ngFor="let item of itemToView.cartItems" >
                         <th scope="row">{{item.productId}}</th>
                         <td>{{item.productName}}</td>
-                        <td>{{item.qty}} <button class="btn btn-sm btn-danger" (click)="reduceQty(item)">X</button></td>
+                        <td>{{item.qty}} <button class="btn btn-sm btn-danger"  id="XBut" (click)="reduceQty(item)">X</button></td>
                         <!-- <td>
                           <div class="form-row">
                             <div class="col">
@@ -57,4 +57,5 @@
                   </table>
             </div>
           </div>
+          <button (click)="print()">print</button>
   </div>

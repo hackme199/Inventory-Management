@@ -68,4 +68,34 @@ export class ViewDispatchComponent implements OnInit {
     this.fetchItemToView()
   }
 
+  print(): void {
+    let printContents, popupWin;
+    // printContents = document.getElementById('print-section').innerHTML;
+    if(document.getElementById("retBut")){
+      var element = document.getElementById("retBut");
+      element.parentNode.removeChild(element);
+    }
+    
+    printContents = document.getElementById('print-section').innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Dispatch Reciept</title>
+          <style>
+          //........Customized style.......
+          </style>
+        </head>
+    <body style="background-image: url('../assets/acpBg.jpeg');" onload="window.print();window.close()">
+    <br>&nbsp;<br><br>&nbsp;<br><br>&nbsp;<br><br>&nbsp;<br>
+    ${printContents}
+    </body>
+      </html>`
+    );
+    popupWin.document.close();
+    location.reload(); 
+    // window.print()
+}
+
 }

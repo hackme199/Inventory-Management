@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'history', component: DispatchHistoryComponent },
   { path: 'view-dispatch/:id', component: ViewDispatchComponent },
 
-  { path: '', component: CategoriesComponent }
+  { path: '', component: HomeComponent }
 ];
 
 @NgModule({
