@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CartItem } from '../models/cart-item';
 import { CheckoutItem } from '../models/checkout-item';
 import { DispatchHistoryService } from '../services/dispatch-history.service';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-view-dispatch',
@@ -68,27 +69,40 @@ export class ViewDispatchComponent implements OnInit {
     this.fetchItemToView()
   }
 
-  print(): void {
+  remove_X(){
+    if (!document.getElementById("XBut")){
+      return
+    }
+    if(document.getElementById("XBut")){
+      var element = document.getElementById("XBut");
+      element.parentNode.removeChild(element);
+      this.remove_X()
+    }
+  }
+
+  print(areaID): void {
     let printContents, popupWin;
     // printContents = document.getElementById('print-section').innerHTML;
     if(document.getElementById("retBut")){
       var element = document.getElementById("retBut");
       element.parentNode.removeChild(element);
     }
+    if(document.getElementById("XBut")){
+      this.remove_X()
+    }
     
     printContents = document.getElementById('print-section').innerHTML;
     popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin.document.open();
+        // <body style="background-image: url('../assets/acpBg.jpeg');" onload="window.print();window.close()">
     popupWin.document.write(`
       <html>
         <head>
           <title>Dispatch Reciept</title>
-          <style>
-          //........Customized style.......
-          </style>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
         </head>
-    <body style="background-image: url('../assets/acpBg.jpeg');" onload="window.print();window.close()">
-    <br>&nbsp;<br><br>&nbsp;<br><br>&nbsp;<br><br>&nbsp;<br>
+    <body onload="window.print();window.close()">
+    <center><img src="../assets/acpLogo.jpeg" height="100px"></center>
     ${printContents}
     </body>
       </html>`
