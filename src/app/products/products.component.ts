@@ -3,6 +3,7 @@ import { Product } from '../models/product';
 import { Params, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Categories } from '../models/category';
+import { MessengerService } from '../services/messenger.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -16,7 +17,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private products : ProductService
+    private products : ProductService,
+    private msg: MessengerService
     ) { }
 
   ngOnInit(): void {
@@ -25,8 +27,23 @@ export class ProductsComponent implements OnInit {
     this.categoryName = productNameFromRoute
     this.products.getProducts().subscribe((products) => {
       this.productList = products.filter(product => product.category === this.categoryName)
-      // console.log(this.productList)
+      console.log(this.productList)
     // console.log('categoryName:',this.categoryName)
+    })
+    this.handleSubscription()
+  }
+
+  handleSubscription() {
+    this.msg.getMsg().subscribe((product: Product) => {
+      this.productItems();
+    })
+  }
+
+  productItems() {
+    this.products.getProducts().subscribe(products => {
+      this.productList = products.filter(product => product.category === this.categoryName)
+      console.log(this.productList)      // console.log(this.cartItems)
+      // this.calcCartTotal();
     })
   }
 }

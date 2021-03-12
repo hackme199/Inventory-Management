@@ -23,7 +23,7 @@ export class NavComponent implements OnInit {
 
   handleSubscription() {
     this.msg.getMsg().subscribe((loginCreds) => {
-      console.log(loginCreds)
+      // console.log(loginCreds)
     })
   }
 

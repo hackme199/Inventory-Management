@@ -4,15 +4,23 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { CartItem } from '../models/cart-item';
-import { cartUrl } from '../config/api';
+import { cartUrl, productsUrl } from '../config/api';
 import { Product } from '../models/product';
+import { Router } from '@angular/router';
+import { MessengerService } from './messenger.service';
+import { ProductService } from './product.service';
+import { ProductsComponent } from '../products/products.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
 
-  constructor(private http: HttpClient) { }
+export class CartService {
+  constructor(
+    private http: HttpClient,
+    private msg : MessengerService,
+    private products: ProductService
+    ) { }
 
   getCartItems(): Observable<CartItem[]> {
     //TODO: Mapping the obtained result to our CartItem props. (pipe() and map())
@@ -44,6 +52,24 @@ export class CartService {
   }
 
   addProductToCart(product: Product): Observable<any> {
-    return this.http.post(cartUrl, { product });
+    // product.qty--
+    // this.http.post(productsUrl, { product });
+    return this.http.post(cartUrl, { product })
+  }
+
+  reduceQty(product: Product): Observable<any> {
+    var newProd = product.qty--
+    this.http.delete(productsUrl + '/' + product.id).subscribe(() => {
+      this.msg.sendMsg(newProd);
+    })
+    return this.http.post(productsUrl, product);
+  }
+
+  incQty(product: Product): Observable<any> {
+    var newProd = product.qty++
+    this.http.delete(productsUrl + '/' + product.id).subscribe(() => {
+      this.msg.sendMsg(newProd);
+    })
+    return this.http.post(productsUrl, product);
   }
 }

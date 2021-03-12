@@ -20,10 +20,14 @@ export class ProductItemComponent implements OnInit {
   }
 
   handleAddToCart() {
-    this.cartService.addProductToCart(this.productItem).subscribe(()=> {
-      this.msg.sendMsg(this.productItem)
-    })
-    
+    // console.log(this.productItem.qty)
+    if (this.productItem.qty>0){
+      this.cartService.addProductToCart(this.productItem).subscribe(()=> {
+        this.msg.sendMsg(this.productItem)
+      })
+      this.cartService.reduceQty(this.productItem).subscribe(()=> {
+        this.msg.sendMsg(this.productItem)
+      })
+    }
   }
-
 }

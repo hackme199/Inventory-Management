@@ -20,7 +20,8 @@ export class AddProductComponent implements OnInit {
     // name: '',
     description: '',
     category:'',
-    id : 401
+    id : 401,
+    qty: 1
   });
 
   productList : Product[]
@@ -28,7 +29,7 @@ export class AddProductComponent implements OnInit {
 
   get name() { return this.productForm.get('name'); }
 
-  model : Product = {id: 10, name: '', description: '', category:'', imageUrl: ''}
+  model : Product = {id: 10, name: '', description: '', category:'', imageUrl: '', qty: 10}
 
   constructor(
     private product: ProductService,
@@ -50,7 +51,10 @@ export class AddProductComponent implements OnInit {
     this.model.description = this.productForm.value.description
     
     this.model.id = this.productList.length+1
-    console.log(this.model.id)
+    // console.log(this.model.id)
+
+    this.model.qty = this.productForm.value.qty
+    console.log(this.model.qty)
 
     console.log(this.model)
     this.product.addProduct(this.model)

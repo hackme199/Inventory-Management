@@ -25,8 +25,11 @@ export class ProductService {
   addProduct(product: Product) {
     this.http.post<Product>(productsUrl, product).toPromise().then(data => {
       console.log(data)
-    })
-    
+    }) 
+  }
+
+  getProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(productsUrl + '/' + id)
   }
 
 }
