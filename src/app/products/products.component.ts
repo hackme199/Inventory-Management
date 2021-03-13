@@ -27,7 +27,7 @@ export class ProductsComponent implements OnInit {
     this.categoryName = productNameFromRoute
     this.products.getProducts().subscribe((products) => {
       this.productList = products.filter(product => product.category === this.categoryName)
-      console.log(this.productList)
+      // console.log(this.productList)
     // console.log('categoryName:',this.categoryName)
     })
     this.handleSubscription()

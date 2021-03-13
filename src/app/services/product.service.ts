@@ -25,6 +25,8 @@ export class ProductService {
   addProduct(product: Product) {
     this.http.post<Product>(productsUrl, product).toPromise().then(data => {
       console.log(data)
+      this.getProducts().subscribe(products => {
+        this.productList = products})
     }) 
   }
 

@@ -20,7 +20,7 @@
                             <p><strong>Contact : </strong>{{itemToView.phone}}</p>
                         </div>
                         <div class="col-3" *ngIf="!itemToView.returnStatus">
-                            <button *ngIf="qtyFlag" class="btn btn-danger" id="retBut" (click)="returned()">Mark as returned</button>
+                            <!-- <button *ngIf="qtyFlag" class="btn btn-danger" id="retBut" (click)="returned()">Mark as returned</button> -->
                             <button *ngIf="markFlag" class="btn btn-success" id="retBut">Marked as returned</button>      
                         </div>
                         <div class="col-3" *ngIf="itemToView.returnStatus">

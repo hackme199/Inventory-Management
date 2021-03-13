@@ -54,9 +54,9 @@ export class AddProductComponent implements OnInit {
     // console.log(this.model.id)
 
     this.model.qty = this.productForm.value.qty
-    console.log(this.model.qty)
+    // console.log(this.model.qty)
 
-    console.log(this.model)
+    // console.log(this.model)
     this.product.addProduct(this.model)
 
     this.addedProduct = true

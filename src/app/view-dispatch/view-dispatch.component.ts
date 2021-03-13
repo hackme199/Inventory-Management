@@ -40,6 +40,7 @@ export class ViewDispatchComponent implements OnInit {
     //   console.log(this.itemToView)
     // })
     this.fetchItemToView()
+    this.chkQty()
 
     this.markFlag = this.itemToView.returnStatus
   }
@@ -69,9 +70,9 @@ export class ViewDispatchComponent implements OnInit {
     })
     console.log(this.qtyCounter)
     if (this.qtyCounter == 0) {
-      this.qtyFlag=true
+      this.itemToView.returnStatus = true
       console.log(this.qtyFlag)
-      return this.qtyFlag
+      // return this.qtyFlag
     }
   }
 
