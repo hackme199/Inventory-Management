@@ -95,7 +95,7 @@ export class DispatchComponent implements OnInit {
     })
     this.proceedFlag = true
 
-    // this.cartService.clearCart()
+    this.cartService.clearCart()
     console.log(this.model)
     
   }

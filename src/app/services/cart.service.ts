@@ -51,6 +51,27 @@ export class CartService {
     );
   }
 
+  clearCart(){
+    this.http.get<CartItem[]>(cartUrl).subscribe(cartItems => {
+      // console.log(cartItems)
+      cartItems.forEach(item => {
+        console.log(item)
+        this.http.delete(cartUrl + '/' + item.id).subscribe(()=> {
+          this.msg.sendMsg(item)
+        })
+      })
+    })
+    this.getCartItems().subscribe(cartItems => {
+      // console.log(cartItems)
+      cartItems.forEach(item => {
+        console.log(item)
+        // this.http.delete(cartUrl + '/' + item.id).subscribe(()=> {
+        //   this.msg.sendMsg(item)
+        // })
+      })
+    })
+  }
+
   addProductToCart(product: Product): Observable<any> {
     // product.qty--
     // this.http.post(productsUrl, { product });

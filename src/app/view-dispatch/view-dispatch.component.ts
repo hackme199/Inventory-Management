@@ -4,6 +4,9 @@ import { CartItem } from '../models/cart-item';
 import { CheckoutItem } from '../models/checkout-item';
 import { DispatchHistoryService } from '../services/dispatch-history.service';
 import { jsPDF } from 'jspdf';
+import { CartService } from '../services/cart.service';
+import { ProductService } from '../services/product.service';
+import { MessengerService } from '../services/messenger.service';
 
 @Component({
   selector: 'app-view-dispatch',
@@ -19,7 +22,10 @@ export class ViewDispatchComponent implements OnInit {
 
   constructor(
     private history: DispatchHistoryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private cartService: CartService,
+    private msg : MessengerService
     ) { }
 
   ngOnInit(): void {
@@ -61,6 +67,12 @@ export class ViewDispatchComponent implements OnInit {
           return 
         }
         cartItem.qty--
+        this.productService.getProduct(cartItem.productId).subscribe(product => {
+                  console.log(product)
+                  this.cartService.incQty(product).subscribe(() => {
+                    this.msg.sendMsg(product)
+                  })
+                })
       }
     })
     this.history.reduceQty(this.dispatchId, this.itemToView).subscribe(data =>{
@@ -68,6 +80,37 @@ export class ViewDispatchComponent implements OnInit {
     })
     this.fetchItemToView()
   }
+
+//   handleDeleteCartItem(cartItem: CartItem) {
+//     if (cartItem.qty >1) {
+//       this.productService.getProduct(cartItem.productId).subscribe(product => {
+//         console.log(product)
+//         this.cartService.incQty(product).subscribe(() => {
+//           this.msg.sendMsg(product)
+//         })
+//       })
+//       this.http.delete(cartUrl + "/" + cartItem.id).subscribe(() => {
+//         this.msg.sendMsg(this.cartItem)
+//       })
+      
+//       // this.cartService.addProductToCart(this.productItem).subscribe(()=> {
+//       //   this.msg.sendMsg(this.productItem)
+//       // })
+//     }
+//     else {
+//       this.productService.getProduct(cartItem.productId).subscribe(product => {
+//         console.log(product)
+//         this.cartService.incQty(product).subscribe(() => {
+//           this.msg.sendMsg(product)
+//         })
+//       })
+//       this.http.delete(cartUrl + "/" + cartItem.id).subscribe(() => {
+//         this.msg.sendMsg(this.cartItem)
+//       })
+//     }
+//   }
+
+// }
 
   remove_X(){
     if (!document.getElementById("XBut")){
