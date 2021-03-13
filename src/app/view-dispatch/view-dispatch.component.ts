@@ -19,6 +19,8 @@ export class ViewDispatchComponent implements OnInit {
   dispatchId : number
   itemToView: CheckoutItem
   markFlag= false
+  qtyFlag = false
+  qtyCounter = 0
 
   constructor(
     private history: DispatchHistoryService,
@@ -60,6 +62,19 @@ export class ViewDispatchComponent implements OnInit {
     this.fetchItemToView()
   }
 
+  chkQty() {
+    this.qtyCounter=0
+    this.itemToView.cartItems.forEach(item => {
+      this.qtyCounter += item.qty
+    })
+    console.log(this.qtyCounter)
+    if (this.qtyCounter == 0) {
+      this.qtyFlag=true
+      console.log(this.qtyFlag)
+      return this.qtyFlag
+    }
+  }
+
   reduceQty(item : CartItem) {
     this.itemToView.cartItems.forEach( cartItem => {
       if(cartItem.id === item.id) {
@@ -67,6 +82,8 @@ export class ViewDispatchComponent implements OnInit {
           return 
         }
         cartItem.qty--
+        this.chkQty()
+       
         this.productService.getProduct(cartItem.productId).subscribe(product => {
                   console.log(product)
                   this.cartService.incQty(product).subscribe(() => {
