@@ -57,12 +57,19 @@ export class AddProductComponent implements OnInit {
 
     this.model.name = this.productForm.value.name
     this.model.description = this.productForm.value.description
-    
-    this.model.id = this.productList.length+1
-    console.log(this.model.id)
 
     this.model.qty = this.productForm.value.qty
     // console.log(this.model.qty)
+    try {
+      this.model.id = this.productList.length+2
+    } catch (error) {
+      console.error('e',error);
+      this.model.id = this.productList.length+2
+      // expected output: ReferenceError: nonExistentFunction is not defined
+      // Note - error messages will vary depending on browser
+    }
+    
+    console.log(this.model.id)
 
     // console.log(this.model)
     this.product.addProduct(this.model)
