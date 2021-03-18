@@ -5,6 +5,7 @@ import { CartService } from '../services/cart.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MessengerService } from '../services/messenger.service';
 import { CheckoutService } from '../services/checkout.service';
+import { getMaxListeners } from 'process';
 
 
 @Component({
@@ -97,6 +98,16 @@ export class DispatchComponent implements OnInit {
 
     this.cartService.clearCart()
     console.log(this.model)
+
+    this.http.post('https://formspree.io/f/xrgonwvq',
+        { Name: this.model.name, Place:this.model.place,
+          Phone: this.model.phone, Dispatcher: this.model.dispatcherName, Remarks: this.model.remarks,
+          Items: this.model.cartItems},
+        ).subscribe(
+          response => {
+            console.log(response);
+          }
+        );
     
   }
 

@@ -4,6 +4,11 @@ import { Product } from '../../models/product';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 
+var productList
+
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
 @Component({
   selector: 'app-add-product',
@@ -44,14 +49,17 @@ export class AddProductComponent implements OnInit {
     this.product.getProducts().subscribe(products => {
       this.productList = products
     })
+
   }
 
   onSubmit(): void {
+    console.log('prev',this.productList)
+
     this.model.name = this.productForm.value.name
     this.model.description = this.productForm.value.description
     
     this.model.id = this.productList.length+1
-    // console.log(this.model.id)
+    console.log(this.model.id)
 
     this.model.qty = this.productForm.value.qty
     // console.log(this.model.qty)
@@ -61,10 +69,16 @@ export class AddProductComponent implements OnInit {
 
     this.addedProduct = true
     this.product.getProducts().subscribe(products => {
-      this.productList = products
+      productList = products
     })
 
+    this.productList = productList
+    console.log(this.productList)
     this.productForm.reset();
+    (async () => { 
+      await delay(300);
+      document.location.reload();
+  })();
   }
 
 }
