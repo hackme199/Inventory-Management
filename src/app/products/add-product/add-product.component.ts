@@ -60,14 +60,16 @@ export class AddProductComponent implements OnInit {
 
     this.model.qty = this.productForm.value.qty
     // console.log(this.model.qty)
-    try {
-      this.model.id = this.productList.length+2
-    } catch (error) {
-      console.error('e',error);
-      this.model.id = this.productList.length+2
-      // expected output: ReferenceError: nonExistentFunction is not defined
-      // Note - error messages will vary depending on browser
-    }
+    // try {
+    //   this.model.id = this.productList.length+2
+    // } catch (error) {
+    //   console.error('e',error);
+    //   this.model.id = this.productList.length+2
+    //   // expected output: ReferenceError: nonExistentFunction is not defined
+    //   // Note - error messages will vary depending on browser
+    // }
+
+    this.model.id = Math.floor((Math.random()*(956487-69) + 69))
     
     console.log(this.model.id)
 
