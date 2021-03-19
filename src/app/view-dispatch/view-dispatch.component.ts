@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { CartItem } from '../models/cart-item';
 import { CheckoutItem } from '../models/checkout-item';
 import { DispatchHistoryService } from '../services/dispatch-history.service';
-import { jsPDF } from 'jspdf';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
 import { MessengerService } from '../services/messenger.service';
