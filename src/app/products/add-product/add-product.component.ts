@@ -31,6 +31,7 @@ export class AddProductComponent implements OnInit {
 
   productList : Product[]
   addedProduct: boolean = false
+  duplicate: boolean = false
 
   get name() { return this.productForm.get('name'); }
 
@@ -53,41 +54,46 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit(): void {
+    var itemExists: boolean = false
     console.log('prev',this.productList)
 
     this.model.name = this.productForm.value.name
     this.model.description = this.productForm.value.description
 
     this.model.qty = this.productForm.value.qty
-    // console.log(this.model.qty)
-    // try {
-    //   this.model.id = this.productList.length+2
-    // } catch (error) {
-    //   console.error('e',error);
-    //   this.model.id = this.productList.length+2
-    //   // expected output: ReferenceError: nonExistentFunction is not defined
-    //   // Note - error messages will vary depending on browser
-    // }
 
     this.model.id = Math.floor((Math.random()*(956487-69) + 69))
     
-    console.log(this.model.id)
+    // console.log(this.model.id)
 
-    // console.log(this.model)
-    this.product.addProduct(this.model)
-
-    this.addedProduct = true
-    this.product.getProducts().subscribe(products => {
-      productList = products
+    this.productList.forEach(item => {
+      if(item.name.toUpperCase() == this.model.name.toUpperCase()) {itemExists = true}
     })
 
-    this.productList = productList
-    console.log(this.productList)
-    this.productForm.reset();
-    (async () => { 
-      await delay(300);
-      document.location.reload();
-  })();
+    // console.log(this.model)
+
+    if(!itemExists){
+      this.product.addProduct(this.model)
+
+      this.addedProduct = true
+      this.product.getProducts().subscribe(products => {
+        productList = products
+      })
+
+      this.productList = productList
+      console.log(this.productList)
+      this.productForm.reset();
+
+      (async () => { 
+        await delay(300);
+        document.location.reload();
+        })();
+    }
+
+    else {
+      this.duplicate = true
+      console.log('duplicate')
+    }
   }
 
 }

@@ -31,6 +31,10 @@
           <div *ngIf="addedProduct" class="alert alert-success">
             <span style="color: green;">Added "{{model.name}}" Successfully !</span>
           </div>
+
+          <div *ngIf="duplicate" class="alert alert-danger">
+            <span style="color: red;">"{{model.name}}" already exists !</span>
+          </div>
         
           <br>
     
