@@ -30,4 +30,18 @@ export class ProductItemComponent implements OnInit {
       })
     }
   }
+
+  decQty(){
+    if (this.productItem.qty>0){
+      this.cartService.reduceQty(this.productItem).subscribe(()=> {
+        this.msg.sendMsg(this.productItem)
+      })
+    }
+  }
+
+  incQty(){
+    this.cartService.incQty(this.productItem).subscribe(()=> {
+      this.msg.sendMsg(this.productItem)
+    })
+  }
 }
