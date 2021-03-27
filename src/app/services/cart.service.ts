@@ -88,10 +88,11 @@ export class CartService {
   }
 
   incQty(product: Product): Observable<any> {
-    var newProd = product.qty++
-    this.http.delete(productsUrl + '/' + product.id).subscribe(() => {
-      this.msg.sendMsg(newProd);
-    })
-    return this.http.post(productsUrl, product);
+    product.qty++
+    // var newProd = product.qty--
+    // this.http.delete(productsUrl + '/' + product.id).subscribe(() => {
+    //   this.msg.sendMsg(newProd);
+    // })
+    return this.http.put(productsUrl + '/' +product.id, product);
   }
 }
