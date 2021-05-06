@@ -1,27 +1,25 @@
-# Inventory
+# Inventory Management
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
+Manage Inventory for your firm locally on your machine. This is an offline application developed to suit the needs of an organisation who want to keep track of items dispatched to their employees temporarily.
 
-## Development server
+## Key features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* Add Categories of your choice.
+* Add Products in respective categories.
+* Increase/Decrease a product's quantity manually as per availability.
+* Dispatch history with summary of all orders.
+* Detailed Dispatched items history with print functionality.
+* Email alert whenever items are dispatched with full details of order.
 
-## Code scaffolding
+## Screenshots
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Screenshot from 2021-05-06 22-50-07](https://user-images.githubusercontent.com/52563724/117339518-73d01200-aebd-11eb-8f11-c3c597d921aa.png)
+![Screenshot from 2021-05-06 22-48-31](https://user-images.githubusercontent.com/52563724/117339616-919d7700-aebd-11eb-93a5-3670f211fcf4.png)
+![Screenshot from 2021-05-06 22-49-08](https://user-images.githubusercontent.com/52563724/117339625-93ffd100-aebd-11eb-859c-389307844cad.png)
+![Screenshot from 2021-05-06 22-49-24](https://user-images.githubusercontent.com/52563724/117339631-95c99480-aebd-11eb-843c-6b90d221174e.png)
+![Screenshot from 2021-05-06 22-49-49](https://user-images.githubusercontent.com/52563724/117339640-96fac180-aebd-11eb-837b-bce9ee22ead2.png)
 
-## Build
+## Further Dev..
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* Admin login + user login
+* Deployment on cloud
